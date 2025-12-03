@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OoperLooper - MIDI Looper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>OoperLooper</h1>
+        <p class="subtitle">MIDI Looper with Web Audio API</p>
+        
+        <div class="midi-status" id="midiStatus">
+            <span class="status-indicator" id="statusIndicator"></span>
+            <span id="statusText">Connecting to MIDI...</span>
+        </div>
+
+        <div class="keyboard">
+            <div class="key white" data-note="60">C</div>
+            <div class="key black" data-note="61">C#</div>
+            <div class="key white" data-note="62">D</div>
+            <div class="key black" data-note="63">D#</div>
+            <div class="key white" data-note="64">E</div>
+            <div class="key white" data-note="65">F</div>
+            <div class="key black" data-note="66">F#</div>
+            <div class="key white" data-note="67">G</div>
+            <div class="key black" data-note="68">G#</div>
+            <div class="key white" data-note="69">A</div>
+            <div class="key black" data-note="70">A#</div>
+            <div class="key white" data-note="71">B</div>
+        </div>
+
+        <div class="controls">
+            <button id="recordBtn" class="control-btn">
+                <span class="btn-icon">●</span>
+                Record
+            </button>
+            <button id="playBtn" class="control-btn">
+                <span class="btn-icon">▶</span>
+                Play
+            </button>
+            <button id="stopBtn" class="control-btn">
+                <span class="btn-icon">■</span>
+                Stop
+            </button>
+            <button id="clearBtn" class="control-btn">
+                <span class="btn-icon">✕</span>
+                Clear
+            </button>
+        </div>
+
+        <div class="loop-info">
+            <div id="loopStatus">Ready</div>
+            <div id="noteCount">Notes: 0</div>
+        </div>
+
+        <div class="instructions">
+            <h3>Instructions</h3>
+            <ul>
+                <li>Connect your MIDI controller</li>
+                <li>Click keys or use MIDI to play sounds</li>
+                <li>Press <strong>Record</strong> to start recording</li>
+                <li>Play notes to record them</li>
+                <li>Press <strong>Play</strong> to loop your recording</li>
+                <li>Keyboard: A-S-D-F-G-H-J-K-L-; (white keys)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #00d4ff, #7b2ff7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.midi-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: inline-flex;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff4757;
+    transition: background 0.3s;
+}
+
+.status-indicator.connected {
+    background: #2ed573;
+    box-shadow: 0 0 10px #2ed573;
+}
+
+.keyboard {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    position: relative;
+    height: 180px;
+}
+
+.key {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.1s;
+    user-select: none;
+}
+
+.key.white {
+    width: 50px;
+    height: 180px;
+    background: linear-gradient(180deg, #f0f0f0 0%, #fff 100%);
+    border: 1px solid #ccc;
+    border-radius: 0 0 8px 8px;
+    color: #333;
+    z-index: 1;
+}
+
+.key.black {
+    width: 35px;
+    height: 120px;
+    background: linear-gradient(180deg, #333 0%, #000 100%);
+    border-radius: 0 0 5px 5px;
+    margin-left: -17px;
+    margin-right: -17px;
+    z-index: 2;
+    color: #fff;
+    font-size: 0.7rem;
+}
+
+.key.white:hover {
+    background: linear-gradient(180deg, #e0e0e0 0%, #f0f0f0 100%);
+}
+
+.key.black:hover {
+    background: linear-gradient(180deg, #444 0%, #222 100%);
+}
+
+.key.white.active {
+    background: linear-gradient(180deg, #00d4ff 0%, #7b2ff7 100%);
+    color: #fff;
+    transform: translateY(2px);
+}
+
+.key.black.active {
+    background: linear-gradient(180deg, #7b2ff7 0%, #00d4ff 100%);
+    transform: translateY(2px);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+#recordBtn.recording {
+    background: #ff4757;
+    animation: pulse 1s infinite;
+}
+
+#playBtn.playing {
+    background: #2ed573;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 71, 87, 0);
+    }
+}
+
+.btn-icon {
+    font-size: 0.9rem;
+}
+
+.loop-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 1rem 0;
+    color: #888;
+}
+
+.instructions {
+    margin-top: 2rem;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    text-align: left;
+}
+
+.instructions h3 {
+    margin-bottom: 1rem;
+    color: #00d4ff;
+}
+
+.instructions ul {
+    list-style: none;
+}
+
+.instructions li {
+    padding: 5px 0;
+    color: #aaa;
+}
+
+.instructions li::before {
+    content: "→ ";
+    color: #7b2ff7;
+}
+
+.instructions strong {
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .key.white {
+        width: 35px;
+        height: 140px;
+    }
+    
+    .key.black {
+        width: 25px;
+        height: 90px;
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+    
+    .keyboard {
+        height: 140px;
+    }
+    
+    .control-btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+}
