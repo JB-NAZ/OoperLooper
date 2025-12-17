@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOOPER THINGS</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        upsideDown: {
+                            bg: '#050505',
+                            red: '#ff0033',
+                            blue: '#0088ff'
+                        }
+                    },
+                    boxShadow: {
+                        'neon-red': '0 0 10px #ff0033',
+                        'neon-blue': '0 0 10px #0088ff'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="h-screen w-screen flex flex-col p-4 relative font-sans">
+
+    <!-- CRT Overlay -->
+    <div id="crt-overlay"></div>
+
+    <!-- Start Overlay -->
+    <div id="start-overlay"
+        class="fixed inset-0 z-[100] flex items-center justify-center transition-opacity duration-500 cursor-pointer"
+        onclick="app.start()">
+        <div class="text-center">
+            <h1 class="font-header text-6xl text-upsideDown-red text-glow-red mb-4">OoperLooper</h1>
+            <p class="text-white text-xl animate-pulse">CLICK TO ENTER THE UPSIDE DOWN</p>
+        </div>
+    </div>
+
+    <!-- Wrapper -->
+    <div class="z-10 flex flex-col h-full w-full max-w-5xl mx-auto gap-2">
+
+        <!-- Top Bar -->
+        <header class="flex flex-col items-center py-4 relative">
+            <div class="absolute top-4 right-0 flex gap-4">
+                <div id="ind-midi"
+                    class="px-4 py-1 rounded-full text-xs font-bold tracking-widest bg-gray-800 text-gray-600 transition-colors">
+                    NO MIDI</div>
+            </div>
+
+            <h1
+                class="font-header text-6xl text-upsideDown-red text-glow-red tracking-widest uppercase border-t-2 border-b-2 border-upsideDown-red py-2 px-12 mt-8">
+                OoperLooper</h1>
+            <p class="text-upsideDown-blue opacity-80 mt-2 tracking-widest text-sm uppercase">Upside Down Edition</p>
+        </header>
+
+        <!-- Instruction -->
+        <div class="flex justify-center my-2">
+            <div
+                class="bg-gray-200 text-black px-6 py-1 rounded-full text-sm font-bold shadow-lg transform -rotate-1 relative">
+                Play keys or click REC to loop!
+            </div>
+        </div>
+
+
+
+        <!-- Loop Slots Grid -->
+        <div class="grid grid-cols-3 gap-6 flex-grow max-h-[40vh]">
+            <!-- CH 1 -->
+            <div id="slot-1" class="loop-slot rounded-2xl p-4 flex flex-col justify-between relative cursor-pointer">
+                <div class="flex justify-between items-start">
+                    <span class="text-upsideDown-red font-header text-xl text-glow-red">CH 1</span>
+                    <div class="status-dot w-4 h-4 rounded-full bg-gray-700 shadow-inner"></div>
+                </div>
+
+                <div class="flex-grow flex items-center justify-center">
+                    <span class="empty-text animate-pulse">EMPTY</span>
+                </div>
+
+                <div class="flex justify-end">
+                    <input type="range" class="w-24 accent-upsideDown-blue" min="0" max="1" step="0.1" value="0.8">
+                </div>
+            </div>
+
+            <!-- CH 2 -->
+            <div id="slot-2" class="loop-slot rounded-2xl p-4 flex flex-col justify-between relative cursor-pointer">
+                <div class="flex justify-between items-start">
+                    <span class="text-upsideDown-red font-header text-xl text-glow-red">CH 2</span>
+                    <div class="status-dot w-4 h-4 rounded-full bg-gray-700 shadow-inner"></div>
+                </div>
+
+                <div class="flex-grow flex items-center justify-center">
+                    <span class="empty-text animate-pulse">EMPTY</span>
+                </div>
+
+                <div class="flex justify-end">
+                    <input type="range" class="w-24 accent-upsideDown-blue" min="0" max="1" step="0.1" value="0.8">
+                </div>
+            </div>
+
+            <!-- CH 3 -->
+            <div id="slot-3" class="loop-slot rounded-2xl p-4 flex flex-col justify-between relative cursor-pointer">
+                <div class="flex justify-between items-start">
+                    <span class="text-upsideDown-red font-header text-xl text-glow-red">CH 3</span>
+                    <div class="status-dot w-4 h-4 rounded-full bg-gray-700 shadow-inner"></div>
+                </div>
+
+                <div class="flex-grow flex items-center justify-center">
+                    <span class="empty-text animate-pulse">EMPTY</span>
+                </div>
+
+                <div class="flex justify-end">
+                    <input type="range" class="w-24 accent-upsideDown-blue" min="0" max="1" step="0.1" value="0.8">
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools & Feedback -->
+        <div class="flex justify-between items-center px-4">
+            <div class="flex gap-4">
+                <!-- Toggle Metronome -->
+                <button id="btn-metronome"
+                    class="bg-gray-800 text-gray-400 p-3 rounded-full hover:text-white transition-colors border border-gray-700">
+                    <i data-lucide="activity"></i>
+                </button>
+                <!-- Toggle Drums Mode -->
+                <button id="btn-drums"
+                    class="bg-gray-800 text-gray-400 px-4 py-2 rounded-full font-bold text-xs tracking-widest hover:text-white transition-colors border border-gray-700">
+                    DRUMS
+                </button>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- VU Meter (Visualizer) -->
+                <div class="w-24 h-2 bg-gray-900 rounded-full overflow-hidden border border-gray-700">
+                    <div id="vu-meter" class="h-full bg-upsideDown-blue w-0 transition-all duration-75"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Control Buttons -->
+        <!-- Center aligned row for Stop / REC / Play -->
+        <div class="flex justify-center items-center gap-8 my-4">
+            <!-- Stop -->
+            <button id="btn-stop"
+                class="w-16 h-16 rounded-full bg-slate-800 border-b-4 border-slate-950 btn-3d shadow-lg flex items-center justify-center hover:bg-slate-700">
+                <div class="w-6 h-6 bg-slate-500 rounded-sm"></div>
+            </button>
+
+            <!-- Large REC -->
+            <button id="btn-rec"
+                class="w-24 h-24 rounded-full bg-black border-4 border-upsideDown-red btn-3d shadow-[0_0_20px_#ff0033] flex items-center justify-center group active:scale-95 transition-all">
+                <div class="text-white font-black font-sans uppercase tracking-widest text-sm z-10">REC</div>
+            </button>
+
+            <!-- Play -->
+            <button id="btn-play"
+                class="w-16 h-16 rounded-full bg-green-600 border-b-4 border-green-900 btn-3d shadow-lg flex items-center justify-center hover:bg-green-500">
+                <i data-lucide="play" class="w-8 h-8 text-green-900 fill-current ml-1"></i>
+            </button>
+        </div>
+
+        <!-- Piano -->
+        <div class="flex-grow relative mt-2">
+            <div
+                class="flex h-32 w-full max-w-3xl mx-auto relative rounded-lg overflow-hidden border-t-8 border-gray-800">
+                <!-- White Keys -->
+                <button class="piano-key flex-1 h-full" data-note="C4"></button>
+                <button class="piano-key flex-1 h-full" data-note="D4"></button>
+                <button class="piano-key flex-1 h-full" data-note="E4"></button>
+                <button class="piano-key flex-1 h-full" data-note="F4"></button>
+                <button class="piano-key flex-1 h-full" data-note="G4"></button>
+                <button class="piano-key flex-1 h-full" data-note="A4"></button>
+                <button class="piano-key flex-1 h-full" data-note="B4"></button>
+                <button class="piano-key flex-1 h-full" data-note="C5"></button>
+
+                <!-- Black Keys -->
+                <button class="piano-key piano-key-black absolute h-20 w-10 left-[10%] -ml-5 z-20"
+                    data-note="C#4"></button>
+                <button class="piano-key piano-key-black absolute h-20 w-10 left-[22.5%] -ml-5 z-20"
+                    data-note="D#4"></button>
+                <!-- Skip E-F gap -->
+                <button class="piano-key piano-key-black absolute h-20 w-10 left-[47.5%] -ml-5 z-20"
+                    data-note="F#4"></button>
+                <button class="piano-key piano-key-black absolute h-20 w-10 left-[60%] -ml-5 z-20"
+                    data-note="G#4"></button>
+                <button class="piano-key piano-key-black absolute h-20 w-10 left-[72.5%] -ml-5 z-20"
+                    data-note="A#4"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if (window.lucide) {
+            lucide.createIcons();
+        } else {
+            console.error("Lucide icons failed to load");
+        }
+    </script>
+</body>
+
+</html>

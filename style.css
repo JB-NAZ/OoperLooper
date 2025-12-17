@@ -1,0 +1,97 @@
+@import url('https://fonts.cdnfonts.com/css/itc-benguiat');
+
+body {
+    background-color: #050505;
+    color: #eee;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* --- CRT Effect --- */
+#crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    /* Scanlines only, no red tint */
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.03));
+    background-size: 100% 3px, 3px 100%;
+}
+
+
+
+/* --- Typography --- */
+.font-header {
+    font-family: 'ITC Benguiat', serif;
+}
+
+.text-glow-red {
+    text-shadow: 0 0 5px #ff0033, 0 0 15px #ff0033;
+}
+
+.text-glow-blue {
+    text-shadow: 0 0 5px #0088ff, 0 0 15px #0088ff;
+}
+
+/* --- UI Components --- */
+
+/* Slots */
+.loop-slot {
+    background: linear-gradient(135deg, rgba(10, 10, 20, 0.9), rgba(5, 5, 10, 0.95));
+    border: 2px solid #0066cc;
+    /* Darker blue initial */
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.loop-slot.selected {
+    border-color: #ff0033;
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.4);
+}
+
+.slot-empty-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 3D Buttons */
+.btn-3d {
+    transition: transform 0.1s, box-shadow 0.1s;
+    user-select: none;
+}
+
+.btn-3d:active {
+    transform: translateY(4px);
+    box-shadow: none !important;
+    /* Managed by inline style or tailwind override usually, using !important for safety here if conflicting classes */
+}
+
+/* Piano Keys */
+.piano-key {
+    background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
+    box-shadow: 0 2px 0 #999;
+}
+
+.piano-key:active,
+.piano-key.active {
+    background: #ff0033 !important;
+    box-shadow: 0 0 10px #ff0033;
+    transform: translateY(2px);
+}
+
+.piano-key-black {
+    background: linear-gradient(to bottom, #333 0%, #000 100%);
+    box-shadow: 0 2px 0 #000;
+}
+
+/* Start Overlay */
+#start-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
